@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SK Rahamath Hussain</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: black;
+            font-family: monospace;  /* FIXED */
+            color: #06eb34;
+            text-align: center;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        h1 {
+            margin-top: 100px;
+            font-size: 45px;
+            text-shadow: 0 0 15px #00ff00;
+        }
+
+        .search-box {
+            margin-top: 40px;
+        }
+
+        input {
+            padding: 12px;
+            width: 260px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border-radius: 20px;
+            border: none;
+            background: #00ff00;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: lime;
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 18px;
+            color: white;
+            white-space: pre-line;  /* makes line breaks work */
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<h1>SK RAHAMATH HUSSAIN</h1>
+
+<div class="search-box">
+    <input type="text" id="mobile" placeholder="you need my data">
+    <button onclick="searchNumber()">Search</button>
+</div>
+
+<div id="result"></div>
+
+<script>
+// MATRIX BACKGROUND EFFECT
+var canvas = document.getElementById("matrix");
+var ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+var letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+letters = letters.split("");
+
+var fontSize = 14;
+var columns = canvas.width / fontSize;
+var drops = [];
+
+for (var x = 0; x < columns; x++)
+    drops[x] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0F0";
+    ctx.font = fontSize + "px monospace";
+
+    for (var i = 0; i < drops.length; i++) {
+        var text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 33);
+
+// SEARCH FUNCTION
+function searchNumber() {
+    var number = document.getElementById("mobile").value;
+    var result = document.getElementById("result");
+
+    if (number === "data") {
+        result.innerText =
+`SK RAHAMATH HUSSAIN EDUCATION
+
+PGDCA – Post Graduate Diploma in Computer Applications (A+), 2024
+Bosch Technical Skill Center
+
+Diploma in Computer Science, 2021
+GIET College
+
+Carpentry & Design Training Course (A+), 2025
+Bosch Technical Skill Center
+
+SSC (10th Class), 2018
+SKVT School
+
+LANGUAGES:
+Telugu, Hindi, English, Tamil, Kannada, Urdu`;
+    } else {
+        result.innerText = "ACCESS DENIED!";
+    }
+}
+</script>
+
+</body>
+</html>
